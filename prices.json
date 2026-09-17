@@ -1,0 +1,42 @@
+{
+    "data": [
+        {
+            "flag":{
+                "price":1000
+            },
+            "pikachu": {
+                "price": 80,
+                "sell": 50
+            },
+            "Eevee": {
+                "price": 10,
+                "sell": 8
+            },
+            "Chikorita": {
+                "price": 25,
+                "sell": 16
+            },
+            "Pachirisu": {
+                "price": 50,
+                "sell": 30
+            },
+            "Swellow": {
+                "price": 100,
+                "sell": 82
+            },
+            "Totodile": {
+                "price": 220,
+                "sell": 170
+            },
+            "Charizard": {
+                "price": 500,
+                "sell": 399
+            }
+        },
+        {
+            "money": "50"
+        }
+    ],
+    "base64":"",
+    "checksum_sha256":""
+}

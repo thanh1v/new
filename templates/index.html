@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BAD CYBER SHOP</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body data-page="{{ page }}">
+  <div class="noise"></div>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('shopping') }}" aria-label="Bad Cyber Shop home">Bad Cyber Shop</a>
+    <div class="level-title">Level <span id="top-level-number">1</span>: <span id="top-level-name">CLIENT-SIDE TRUST</span></div>
+    <div class="player-menu">
+      <div class="menu-title">Menu: <span id="menu-player-name">Player</span></div>
+      <nav class="menu-links" aria-label="Player menu">
+        <a class="{% if page == 'inventory' %}active{% endif %}" href="{{ url_for('inventory') }}">Inventory</a>
+        <a class="{% if page == 'shopping' %}active{% endif %}" href="{{ url_for('shopping') }}">Shopping</a>
+        <a class="{% if page == 'save' %}active{% endif %}" href="{{ url_for('save_file') }}" id="save-menu-link">Save file</a>
+        <button class="menu-link" id="reset-button" type="button">Log out</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="intro-row">
+      <div>
+        <div class="balance-card"><span>Balance:</span> <strong id="wallet">50.00$</strong></div>
+      </div>
+      <div class="player-card">
+        <div class="mini-label">ACTIVE PLAYER</div>
+        <div class="player-name" id="player-name">PLAYER1</div>
+        <div class="player-id" id="player-id">ID: 0034-145-7858-2003</div>
+        <div class="money-line"><span>WALLET</span><strong id="player-wallet">$50.00</strong></div>
+      </div>
+    </section>
+
+    <section class="level-strip" aria-label="Game levels">
+      <div class="level-step active" data-level="1"><span>01</span><b>LOOSE CHANGE</b><small>JSON SAVE</small></div>
+      <div class="level-line"></div>
+      <div class="level-step" data-level="2"><span>02</span><b>SIGNED, NOT SAFE</b><small>MD5 PACKET</small></div>
+      <div class="level-line"></div>
+      <div class="level-step" data-level="3"><span>03</span><b>POINT ZERO</b><small>DECIMAL LOGIC</small></div>
+    </section>
+
+    <section class="workspace">
+      <div class="main-column">
+        <div class="level-heading">
+          <div><p class="kicker" id="level-eyebrow">LEVEL 01 / CLIENT-SIDE TRUST</p><h2 id="level-name">Loose Change</h2></div>
+        </div>
+
+        <div class="level-panel" id="level-1-panel">
+          <div class="panel-copy"><span class="panel-number">01</span><div><h3>THE SAVE FILE</h3></div></div>
+          <div class="file-actions"><a class="button primary" href="/api/save"><span class="button-icon">↓</span> DOWNLOAD PLAYER.JSON</a><label class="button secondary" for="save-upload"><span class="button-icon">↑</span> UPLOAD MODIFIED FILE</label><input id="save-upload" type="file" accept="application/json" hidden></div>
+        </div>
+
+        <div class="level-panel hidden" id="level-2-panel">
+          <div class="panel-copy"><span class="panel-number orange">02</span><div><h3>THE SAVE FILE</h3></div></div>
+          <div class="file-actions"><a class="button orange-button" href="/api/save"><span class="button-icon">↓</span> DOWNLOAD PLAYER.JSON</a><label class="button secondary" for="save-upload-level2"><span class="button-icon">↑</span> UPLOAD MODIFIED FILE</label><input id="save-upload-level2" type="file" accept="application/json" hidden></div>
+        </div>
+
+        <div class="level-panel hidden" id="level-3-panel">
+          <div class="panel-copy"><span class="panel-number pink">03</span><div><h3>THE SALE TERMINAL</h3></div></div>
+          <div class="terminal-grid"><div><p class="terminal-label">SELECTED ITEM</p><select id="sell-item"><option value="Eevee">Eevee / SELL $8</option><option value="Chikorita">Chikorita / SELL $16</option></select></div><div><p class="terminal-label">QUANTITY</p><input id="sell-quantity" type="number" min="1" max="100" step="1" value="1.9"></div><div class="repeat-control"><p class="terminal-label">LOOP COUNT</p><input id="repeat-count" type="number" min="1" max="50" step="1" value="10"></div></div>
+          <div class="file-actions"><button class="button pink-button" id="buy-terminal-item" type="button"><span class="button-icon">+</span> BUY SELECTED ITEM</button><button class="button secondary" id="sell-item-button" type="button"><span class="button-icon">↗</span> RUN SALE LOOP</button></div>
+        </div>
+
+        <div class="level-panel hidden" id="save-disabled-panel">
+          <p>This level do not allowed to using save file</p>
+        </div>
+
+        <div class="shop-section" id="shopping"><div class="section-header"><div><p class="kicker">INVENTORY / MARKET</p><h3>LEGAL GOODS</h3></div></div><div class="product-grid" id="product-grid"></div></div>
+      </div>
+
+      <aside class="side-column" id="inventory">
+        <div class="inventory-box"><div class="section-header"><div><p class="kicker">PLAYER STORAGE</p><h3>INVENTORY</h3></div></div><div id="inventory-list" class="inventory-list"></div></div>
+        <div class="vault-box"><div class="section-header"><div><p class="kicker">SECURITY VAULT</p><h3>FLAGS</h3></div><span class="lock-mark">⌁</span></div><div id="flag-list" class="flag-list"></div></div>
+        <div class="activity-box"><div class="section-header"><div><p class="kicker">LIVE TELEMETRY</p><h3>EVENT LOG</h3></div><span class="live-label"><span class="live-dot"></span> LIVE</span></div><div id="activity-log" class="activity-log"></div></div>
+      </aside>
+    </section>
+    <div id="toast" class="toast" role="status"></div>
+    <div id="player-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="player-modal-title">
+      <form id="player-form" class="modal-panel">
+        <p class="kicker">NEW SESSION</p>
+        <h2 id="player-modal-title">ENTER PLAYER NAME</h2>
+        <label for="player-name-input">PLAYER NAME</label>
+        <input id="player-name-input" type="text" maxlength="32" autocomplete="nickname" required>
+        <button class="button primary" type="submit">START GAME <span class="button-icon">-&gt;</span></button>
+      </form>
+    </div>
+    <div id="level-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="level-modal-title">
+      <div class="modal-panel celebration-panel">
+        <p class="kicker">ACCESS GRANTED</p>
+        <h2 id="level-modal-title">CONGRATULATIONS!</h2>
+        <p id="level-modal-message"></p>
+        <div class="unlocked-flag" id="unlocked-flag"></div>
+        <button class="button primary" id="close-level-modal" type="button">CONTINUE <span class="button-icon">-&gt;</span></button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
